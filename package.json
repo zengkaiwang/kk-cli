@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": "./bin/www",
+  "bin": {
+    "kai": "./bin/www",
+    "kk-cli": "./bin/www"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
