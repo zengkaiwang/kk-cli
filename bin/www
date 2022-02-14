@@ -13,7 +13,9 @@ program
   .description('create a new program')
   .option('-f, --force', 'overwrite targe directory if it exists')
   .action((name, cmd) => {
-    console.log(name, cmd)
+    // console.log(name, cmd)
+    // 调用抽离出去的create模块, 去执行create命令对应的操作
+    require('../lib/create')(name, cmd)
   })
 
 // 2) 修改配置命令, 如npm config
@@ -26,6 +28,7 @@ program
   .option('-s, --set <path> <value>')
   .option('-d, --delete <path>', 'delete option from config')
   .action((value, cmd) => {
+    // 调用抽离出去的config模块
     console.log(value, cmd)
   })
 
@@ -46,7 +49,6 @@ program.parse(process.argv) // 执行kai --help 就有效果了
 // 2 实现命令行跟用户交互的功能 inquirer
 // 3 将项目模板下载下来 download-git-repo
 // 4 根据用户的选择, 动态的生成项目模板内容 metalsmith
-console.log('kk-cli~')
 
 // 命令参数格式化: 新版的commander包内部已处理
 function cleanArgs(cmd) {
