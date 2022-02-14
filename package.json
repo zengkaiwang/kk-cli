@@ -1,5 +1,5 @@
 {
-  "name": "kai",
+  "name": "kai-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/zengkaiwang/kk-cli/issues"
   },
-  "homepage": "https://github.com/zengkaiwang/kk-cli#readme"
+  "homepage": "https://github.com/zengkaiwang/kk-cli#readme",
+  "dependencies": {
+    "commander": "^9.0.0"
+  }
 }

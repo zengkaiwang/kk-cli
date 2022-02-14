@@ -1,3 +1,51 @@
 #! /usr/bin/env node
 
+const { version } = require('../package.json')
+
+// 1 配置可执行命令 commander 
+const program = require('commander')
+
+// 1) 创建项目命令
+// 处理目录中重名的情况, 强制创建模式
+program
+  .command('create <app-name>')
+  .description('create a new program')
+  .option('-f, --force', 'overwrite targe directory if it exists')
+  .action((name, cmd) => {
+    console.log(name, cmd)
+  })
+
+// 2) 修改配置命令, 如npm config
+// 再如, vue config -get a 获取配置信息
+// vue config --set a 1 设置配置信息
+program
+  .command('config [value]')
+  .description('inspect or modify the config')
+  .option('-g, --get <path>', 'get value from option')
+  .option('-s, --set <path> <value>')
+  .option('-d, --delete <path>', 'delete option from config')
+  .action((value, cmd) => {
+    console.log(value, cmd)
+  })
+
+program
+  .version(`kai-cli @${version}`) // 执行kai --version 就有效了
+  .usage(`<commander> [option]`)
+
+// 解析用户执行命令输入的参数
+program.parse(process.argv) // 执行kai --help 就有效果了
+
+// 2 实现命令行跟用户交互的功能 inquirer
+// 3 将项目模板下载下来 download-git-repo
+// 4 根据用户的选择, 动态的生成项目模板内容 metalsmith
 console.log('kk-cli~')
+
+// 命令参数格式化: 新版的commander包内部已处理
+function cleanArgs(cmd) {
+  const args = {}
+  cmd.options.forEach(o => {
+    const key = o.long.slice(2)
+    if(o[key]) args[key] = o[key]
+  })
+  return args
+}
