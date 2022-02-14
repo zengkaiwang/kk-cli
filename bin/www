@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 const { version } = require('../package.json')
+const chalk = require('chalk')
 
 // 1 配置可执行命令 commander 
 const program = require('commander')
@@ -31,6 +32,13 @@ program
 program
   .version(`kai-cli @${version}`) // 执行kai --version 就有效了
   .usage(`<commander> [option]`)
+
+// 监听--help参数, 使用chalk包 设置漂亮的字体颜色
+program.on('--help', function() {
+  console.log()
+  console.log(`run ${chalk.cyan('kk-cli <commander> --help')} show details`)
+  console.log()
+})
 
 // 解析用户执行命令输入的参数
 program.parse(process.argv) // 执行kai --help 就有效果了
